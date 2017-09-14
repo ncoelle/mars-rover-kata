@@ -2,7 +2,8 @@
 
 == Intro ==
 This is my take on the Mars Rover Kata. Got my inspiration
-from <<References,publications of Sandro Mancuso>>
+from <<References,publications of Sandro Mancuso>>. Additionally
+I use it to learn some http://junit.org/junit5/docs/current/user-guide/[Junit 5].
 
 == Task ==
 Develop an API which moves a rover around on a grid.
