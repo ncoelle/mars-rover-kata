@@ -1,8 +1,16 @@
 package com.coelleonline.marsrover;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Grid {
 	private static final int MAX_HEIGHT = 10;
 	private static final int MAX_WIDTH = 10;
+	private final List<Coordinate> obstacles;
+
+	Grid(List<Coordinate> obstacles) {
+		this.obstacles = new ArrayList<>(obstacles);
+	}
 
 	Coordinate nextCoordinateFor(Coordinate coordinate, Direction currentDirection) {
 		int y = coordinate.y();
@@ -19,6 +27,7 @@ class Grid {
 		if (currentDirection == Direction.WEST) {
 			x = (x > 0) ? x - 1 : MAX_WIDTH - 1;
 		}
-		return new Coordinate(x, y);
+		final Coordinate nextCoordinate = new Coordinate(x, y);
+		return obstacles.contains(nextCoordinate) ? coordinate : nextCoordinate;
 	}
 }

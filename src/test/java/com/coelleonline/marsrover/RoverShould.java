@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -95,6 +96,19 @@ class RoverShould {
 			"LLMMMMMMMMMM, 0:0:S",
 	})
 	void move_down(String commands, String position) {
+		assertThat(rover.execute(commands), is(position));
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"MMMMM, 0:3:N",
+			"RMMMMMMM, 1:0:E",
+	})
+	void stop_at_obstacle(String commands, String position) {
+		final Coordinate obstacle_0x4 = new Coordinate(0, 4);
+		final Coordinate obstacle_2x0 = new Coordinate(2, 0);
+		final Grid grid = new Grid(asList(obstacle_0x4, obstacle_2x0));
+		final Rover rover = new Rover(grid);
 		assertThat(rover.execute(commands), is(position));
 	}
 }
