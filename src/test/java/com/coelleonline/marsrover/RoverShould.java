@@ -44,9 +44,18 @@ class RoverShould {
 	@CsvSource({
 			"M, 0:1:N",
 			"MMMMM, 0:5:N",
-			"MMMMMMMMMM, 0:10:N",
+			"MMMMMMMMM, 0:9:N",
 	})
 	void move_up(String commands, String position) {
+		assertThat(rover.execute(commands), is(position));
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"MMMMMMMMMM, 0:0:N",
+			"MMMMMMMMMMMMMMM, 0:5:N",
+	})
+	void wrap_from_top_to_bottom_when_moving_north(String commands, String position) {
 		assertThat(rover.execute(commands), is(position));
 	}
 }
