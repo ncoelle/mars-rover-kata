@@ -101,8 +101,8 @@ class RoverShould {
 
 	@ParameterizedTest
 	@CsvSource({
-			"MMMMM, 0:3:N",
-			"RMMMMMMM, 1:0:E",
+			"MMMMM, O:0:3:N",
+			"RMMMMMMM, O:1:0:E",
 	})
 	void stop_at_obstacle(String commands, String position) {
 		final Coordinate obstacle_0x4 = new Coordinate(0, 4);

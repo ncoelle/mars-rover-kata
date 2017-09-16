@@ -1,6 +1,7 @@
 package com.coelleonline.marsrover;
 
 import java.util.Collections;
+import java.util.Optional;
 
 class Rover {
 	private static final int INITIAL_X = 0;
@@ -20,6 +21,7 @@ class Rover {
 
 	String execute(String commandString) {
 		final char[] commands = commandString.toCharArray();
+		String obstacleString = "";
 		for (char command : commands) {
 			if (command == 'R') {
 				currentDirection = currentDirection.right();
@@ -28,9 +30,16 @@ class Rover {
 				currentDirection = currentDirection.left();
 			}
 			if (command == 'M') {
-				coordinate = grid.nextCoordinateFor(coordinate, currentDirection);
+				obstacleString = move();
 			}
 		}
-		return coordinate.x() + ":" + coordinate.y() + ":" + currentDirection.value();
+		return obstacleString + coordinate.x() + ":" + coordinate.y() + ":" + currentDirection.value();
+	}
+
+	private String move() {
+		Optional<Coordinate> nextCoordinate = grid.nextCoordinateFor(coordinate, currentDirection);
+		nextCoordinate.ifPresent(co -> this.coordinate = co);
+		String obstacleString = nextCoordinate.isPresent() ? "" : "O:";
+		return obstacleString;
 	}
 }
