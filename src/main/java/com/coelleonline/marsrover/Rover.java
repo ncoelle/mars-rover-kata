@@ -23,6 +23,10 @@ class Rover {
 	}
 
 	private Coordinate move() {
-		return new Coordinate(coordinate.x(), coordinate.y() + 1);
+		int y = 0;
+		if (currentDirection == Direction.NORTH) {
+			y = coordinate.y() + 1;
+		}
+		return new Coordinate(coordinate.x(), y);
 	}
 }
