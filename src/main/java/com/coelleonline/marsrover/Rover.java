@@ -1,9 +1,10 @@
 package com.coelleonline.marsrover;
 
 class Rover {
+	private static final int INITIAL_X = 0;
+	private static final int INITIAL_Y = 0;
 	private Direction currentDirection = Direction.NORTH;
-	private int x = 0;
-	private int y = 0;
+	private Coordinate coordinate = new Coordinate(INITIAL_X, INITIAL_Y);
 
 	String execute(String commandString) {
 		final char[] commands = commandString.toCharArray();
@@ -15,9 +16,13 @@ class Rover {
 				currentDirection = currentDirection.left();
 			}
 			if (command == 'M') {
-				y++;
+				coordinate = move();
 			}
 		}
-		return x + ":" + y + ":" + currentDirection.value();
+		return coordinate.x() + ":" + coordinate.y() + ":" + currentDirection.value();
+	}
+
+	private Coordinate move() {
+		return new Coordinate(coordinate.x(), coordinate.y() + 1);
 	}
 }
