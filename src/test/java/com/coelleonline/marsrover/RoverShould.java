@@ -77,4 +77,14 @@ class RoverShould {
 	void wrap_from_right_to_left_when_moving_east(String commands, String position) {
 		assertThat(rover.execute(commands), is(position));
 	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"LM, 9:0:W",
+			"LMMMMM, 5:0:W",
+			"LMMMMMMMMMM, 0:0:W",
+	})
+	void move_left(String commands, String position) {
+		assertThat(rover.execute(commands), is(position));
+	}
 }
