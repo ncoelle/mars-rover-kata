@@ -34,6 +34,9 @@ class Rover {
 		if (currentDirection == Direction.EAST) {
 			x = (x + 1) % MAX_WIDTH;
 		}
+		if (currentDirection == Direction.SOUTH) {
+			y = (y > 0) ? y - 1 : MAX_HEIGHT - 1;
+		}
 		if (currentDirection == Direction.WEST) {
 			x = (x > 0) ? x - 1 : MAX_WIDTH - 1;
 		}

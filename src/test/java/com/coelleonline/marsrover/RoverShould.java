@@ -87,4 +87,14 @@ class RoverShould {
 	void move_left(String commands, String position) {
 		assertThat(rover.execute(commands), is(position));
 	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"LLM, 0:9:S",
+			"LLMMMMM, 0:5:S",
+			"LLMMMMMMMMMM, 0:0:S",
+	})
+	void move_down(String commands, String position) {
+		assertThat(rover.execute(commands), is(position));
+	}
 }
