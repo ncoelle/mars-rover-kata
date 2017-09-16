@@ -3,9 +3,8 @@ package com.coelleonline.marsrover;
 class Rover {
 	private static final int INITIAL_X = 0;
 	private static final int INITIAL_Y = 0;
-	private static final int MAX_HEIGHT = 10;
-	private static final int MAX_WIDTH = 10;
 
+	private Grid grid = new Grid();
 	private Direction currentDirection = Direction.NORTH;
 	private Coordinate coordinate = new Coordinate(INITIAL_X, INITIAL_Y);
 
@@ -19,27 +18,9 @@ class Rover {
 				currentDirection = currentDirection.left();
 			}
 			if (command == 'M') {
-				coordinate = move();
+				coordinate = grid.nextCoordinateFor(coordinate, currentDirection);
 			}
 		}
 		return coordinate.x() + ":" + coordinate.y() + ":" + currentDirection.value();
-	}
-
-	private Coordinate move() {
-		int y = coordinate.y();
-		int x = coordinate.x();
-		if (currentDirection == Direction.NORTH) {
-			y = (y + 1) % MAX_HEIGHT;
-		}
-		if (currentDirection == Direction.EAST) {
-			x = (x + 1) % MAX_WIDTH;
-		}
-		if (currentDirection == Direction.SOUTH) {
-			y = (y > 0) ? y - 1 : MAX_HEIGHT - 1;
-		}
-		if (currentDirection == Direction.WEST) {
-			x = (x > 0) ? x - 1 : MAX_WIDTH - 1;
-		}
-		return new Coordinate(x, y);
 	}
 }
