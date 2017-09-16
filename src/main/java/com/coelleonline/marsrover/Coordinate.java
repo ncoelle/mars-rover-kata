@@ -1,6 +1,6 @@
 package com.coelleonline.marsrover;
 
-class Coordinate {
+final class Coordinate {
 	private final int x;
 	private final int y;
 
