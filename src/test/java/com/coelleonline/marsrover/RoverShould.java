@@ -21,9 +21,22 @@ class RoverShould {
 			"R, 0:0:E",
 			"RR, 0:0:S",
 			"RRR, 0:0:W",
-			"RRRR, 0:0:N"
+			"RRRR, 0:0:N",
+			"RRRRR, 0:0:E"
 	})
 	void rotate_right(String commands, String position) {
+		assertThat(rover.execute(commands), is(position));
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"L, 0:0:W",
+			"LL, 0:0:S",
+			"LLL, 0:0:E",
+			"LLLL, 0:0:N",
+			"LLLLL, 0:0:W",
+	})
+	void rotate_left(String commands, String position) {
 		assertThat(rover.execute(commands), is(position));
 	}
 }
