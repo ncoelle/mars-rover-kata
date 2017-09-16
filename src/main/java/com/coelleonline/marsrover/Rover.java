@@ -2,6 +2,8 @@ package com.coelleonline.marsrover;
 
 class Rover {
 	private Direction currentDirection = Direction.NORTH;
+	private int x = 0;
+	private int y = 0;
 
 	String execute(String commandString) {
 		final char[] commands = commandString.toCharArray();
@@ -12,7 +14,10 @@ class Rover {
 			if (command == 'L') {
 				currentDirection = currentDirection.left();
 			}
+			if (command == 'M') {
+				y++;
+			}
 		}
-		return "0:0:" + currentDirection.value();
+		return x + ":" + y + ":" + currentDirection.value();
 	}
 }
